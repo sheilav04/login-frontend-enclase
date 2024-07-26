@@ -33,6 +33,25 @@ export const Profile = () => {
   const [newLoad, setNewLoading] = useState(false)
   const [newError, setNewError] = useState(null)  
   
+  //const handleCrear = async () => {
+    setLoading(true)
+    useEffect(() => {
+      fetch('http://localhost:3002/users',{ method: "POST",
+        headers: {"Content-Type": "application/json", "role": "admin"},
+        body: JSON.stringify({"email": "alberto@gmail.com", "password": "123455", "rol": "basic"})
+      })
+      .then(respose => respose.json())
+      .then(dataPost => {
+        setNewData(dataPost)
+        console.log(dataPost);
+      })
+      .catch((error) => {
+        setNewError(error)
+        console.log(error)})
+      .finally(()=>{
+        setNewLoading(false) 
+      })  
+    }, [])
     
 //}
 
